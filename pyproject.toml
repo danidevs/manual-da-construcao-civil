@@ -1,0 +1,25 @@
+[project]
+name = "manual_da_construcao_civil"
+version = "0.1.0"
+description = "manual-da-construcao-civil using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[google-genai,tools]>=1.15.28,<2.0.0",
+]
+
+[project.scripts]
+manual_da_construcao_civil = "manual_da_construcao_civil.main:run"
+run_crew = "manual_da_construcao_civil.main:run"
+train = "manual_da_construcao_civil.main:train"
+replay = "manual_da_construcao_civil.main:replay"
+test = "manual_da_construcao_civil.main:test"
+run_with_trigger = "manual_da_construcao_civil.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+project_id = "39144100-8008-4f8d-b695-890923e09757"
