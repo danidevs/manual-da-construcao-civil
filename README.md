@@ -1,54 +1,76 @@
-# ManualDaConstrucaoCivil Crew
+# 📱 Manual da Construção Civil - Mobile App (AI Powered)
 
-Welcome to the ManualDaConstrucaoCivil Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Este repositório contém o código-fonte de um **aplicativo de celular** desenvolvido para levar inteligência artificial diretamente para o canteiro de obras. O objetivo principal é fornecer a engenheiros, arquitetos e mestres de obras um assistente de campo inteligente para consulta de diretrizes de layout, regras de ventilação, incidência solar e boas práticas em tempo real.
 
-## Installation
+O projeto faz parte do bootcamp **Bradesco Agentes de IA do Zero à Prática** em parceria com a **DIO**.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+---
 
-First, if you haven't already, install uv:
+## 🛠️ Arquitetura do Sistema
 
+O aplicativo combina uma interface mobile ágil com um motor de inteligência artificial descentralizado e eficiente:
+
+- **Frontend Mobile:** Interface otimizada para o dia a dia no campo de trabalho.
+- **Motor de IA (Orquestração):** Framework **CrewAI** gerenciando um sistema multiagente especializado.
+- **Processamento Local (LLM):** **Llama 3.1 (8B / 4.9 GB)** rodando 100% local via **Ollama**, garantindo privacidade de dados, autonomia e custo zero com APIs pagas.
+
+---
+
+## 🏗️ Como a IA funciona por trás do App
+
+A inteligência de retaguarda do aplicativo é estruturada através do CrewAI (padrão classic) e está dividida em módulos:
+
+- `src/manual_da_construcao_civil/config/agents.yaml`: Perfil e *backstory* dos agentes especialistas (ex: Engenheiro de Layout, Analista de Conforto Ambiental).
+- `src/manual_da_construcao_civil/config/tasks.yaml`: Escopo das análises técnicas de engenharia, ventilação e iluminação natural.
+- `src/manual_da_construcao_civil/crew.py`: Configuração do pipeline de IA e injeção do modelo local Llama 3.1.
+- `src/manual_da_construcao_civil/main.py`: Camada de serviço que expõe a execução dos agentes para consumo da aplicação celular.
+
+---
+
+## 💻 Instalação e Configuração do Motor de IA
+
+Para que o aplicativo possa realizar as consultas de IA offline/localmente, configure o ambiente de execução:
+
+### Pré-requisitos
+- Python >= 3.10, < 3.14
+- [Ollama](https://ollama.com) instalado e ativo na máquina local/servidor de desenvolvimento.
+- [UV](https://astral.sh) para gerenciamento rápido de pacotes Python.
+
+### 1. Inicializar o Modelo Local
+```bash
+ollama run llama3.1
+```
+
+### 2. Instalar Dependências do Back-end
+Utilizando o gerenciador `uv` na raiz do projeto:
 ```bash
 pip install uv
-```
-
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
 crewai install
 ```
-### Customizing
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/manual_da_construcao_civil/config/agents.yaml` to define your agents
-- Modify `src/manual_da_construcao_civil/config/tasks.yaml` to define your tasks
-- Modify `src/manual_da_construcao_civil/crew.py` to add your own logic, tools and specific args
-- Modify `src/manual_da_construcao_civil/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
-```bash
-$ crewai run
+### 3. Variáveis de Ambiente (`.env`)
+Configure o direcionamento para o modelo local:
+```env
+MODEL=ollama/llama3.1
 ```
 
-This command initializes the manual-da-construcao-civil Crew, assembling the agents and assigning them tasks as defined in your configuration.
+---
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## 🚀 Execução e Testes
 
-## Understanding Your Crew
+Seguindo um fluxo profissional rigoroso de engenharia de software (validação de ambiente, execução de testes e commits seguros no GitHub), você pode testar o motor de IA isoladamente via CLI com o comando:
 
-The manual-da-construcao-civil Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+```bash
+crewai run
+```
 
-## Support
+---
 
-For support, questions, or feedback regarding the ManualDaConstrucaoCivil Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+## 🎯 Status do Roadmap do Projeto
+- [x] Modelagem e validação do sistema multiagente (CrewAI).
+- [x] Execução estável e homologada com Llama 3.1 local via Ollama.
+- [x] Versionamento inicial seguro no GitHub.
+- [ ] Conectar e expor os agentes para consumo direto na interface do aplicativo mobile.
 
-Let's create wonders together with the power and simplicity of crewAI.
+---
+Desenvolvido por Daniel | Portfólio Técnico de IA & Desenvolvimento Mobile.

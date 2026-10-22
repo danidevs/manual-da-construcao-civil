@@ -1,11 +1,48 @@
 #!/usr/bin/env python
 import sys
 import warnings
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
-# AQUI: Mudamos de ManualDaConstrucaoCivil para ManualDaConstrucaoCivilCrew
+# Importação da sua classe de Crew
 from manual_da_construcao_civil.crew import ManualDaConstrucaoCivilCrew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
+
+# =====================================================================
+# CONFIGURAÇÃO DA API PARA O APLICATIVO DE CELULAR
+# =====================================================================
+
+app = FastAPI(title="API do Manual da Construção Civil")
+
+# Modelo de dados que o aplicativo de celular vai enviar no corpo da requisição (JSON)
+class PerguntaInput(BaseModel):
+    pergunta_usuario: str
+
+@app.post("/api/perguntar")
+def api_perguntar_agente(input_data: PerguntaInput):
+    try:
+        # Instancia a sua Crew
+        crew_instancia = ManualDaConstrucaoCivilCrew().crew()
+        
+        # Mapeia a pergunta vinda do celular para a variável 'tema' esperada pelas suas tasks
+        inputs = {
+            'tema': input_data.pergunta_usuario
+        }
+        
+        # Executa a inteligência dos agentes
+        resultado = crew_instancia.kickoff(inputs=inputs)
+        
+        # Retorna a resposta final limpa para o front-end do celular
+        return {"resposta": str(resultado)}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro interno no agente: {str(e)}")
+
+
+# =====================================================================
+# COMANDOS ORIGINAIS DO CREWAI (MANTIDOS PARA USO NO TERMINAL)
+# =====================================================================
 
 def run():
     """
@@ -14,8 +51,6 @@ def run():
     inputs = {
         'tema': 'Construcao de Casa Residencial'
     }
-    
-    # AQUI TAMBEM: Mudamos o nome da classe que esta sendo chamada
     ManualDaConstrucaoCivilCrew().crew().kickoff(inputs=inputs)
 
 def train():
