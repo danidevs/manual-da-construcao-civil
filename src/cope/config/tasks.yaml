@@ -1,0 +1,64 @@
+# src/manual_da_construcao_civil/config/tasks.yaml
+
+tarefa_arquitetura:
+  description: >
+    Desenvolver as diretrizes iniciais do ecossistema COPE focando no planejamento e concepção do layout residencial. 
+    Explicar detalhadamente como definir o posicionamento estratégico dos cômodos, otimização e aproveitamento do terreno, 
+    fluxo de circulação interna, além de conceitos de conforto térmico através do aproveitamento de luz solar e ventilação natural.
+  expected_output: >
+    Um guia executivo de planejamento arquitetônico, contendo organogramas de fluxo, diretrizes de layout e conceitos de eficiência espacial para a edificação.
+  agent: arquiteto
+
+tarefa_estrutura_civil:
+  description: >
+    Com base no layout consolidado pela consultoria de arquitetura, estabelecer as instruções técnicas rigorosas para a infraestrutura e superestrutura. 
+    Descrever o passo a passo metodológico para marcação do terreno (gabarito), abertura de valas, execução do sistema de fundação 
+    (alicerces/sapatas) e o detalhamento técnico para montagem de armaduras, colunas, vigas e lajes.
+  expected_output: >
+    Um manual de engenharia estrutural especificando traços de concreto ideais, fatores de cura, normas de segurança aplicáveis (NBRs) e critérios de estabilidade.
+  agent: engenheiro_civil
+
+tarefa_instalacao_eletrica:
+  description: >
+    A partir dos parâmetros estruturais definidos, integrar as diretrizes de engenharia para a rede elétrica predial. 
+    Explicar o posicionamento estratégico das caixas de passagem, o caminhamento correto dos conduítes embutidos em paredes e lajes, 
+    o dimensionamento técnico de condutores (bitolas dos cabos) e a arquitetura de montagem do Quadro de Distribuição de Circuitos (QDC).
+  expected_output: >
+    Um memorial descritivo e passo a passo técnico para instalações elétricas residenciais, focado em segurança contra sobrecargas, balanceamento de fases e conformidade com a NBR 5410.
+  agent: engenheiro_eletrico
+
+tarefa_planejamento_canteiro:
+  description: >
+    Consolidar as diretrizes técnicas dos engenheiros e do arquiteto para estruturar a inteligência operacional do canteiro sob o padrão COPE. 
+    Elaborar um cronograma físico-financeiro prático de execução, a logística de recebimento, armazenamento e estocagem estratégica de insumos, 
+    além de métodos de liderança e distribuição de equipes para mitigar o tempo ocioso.
+  expected_output: >
+    Um plano de gerenciamento e logística de canteiro de obras, formatado como um guia de tomada de decisão para otimização de recursos.
+  agent: mestre_de_obras
+
+tarefa_erguer_alvenaria:
+  description: >
+    Desenvolver as instruções de campo detalhadas para o levantamento de paredes e alvenaria de vedação/estrutural, seguindo o cronograma logístico. 
+    Explicar com rigor técnico o preparo e dosagem da massa de assentamento, a utilização correta de ferramentas de precisão (prumo, nível de bolha ou laser e linha de nylon) 
+    e as técnicas recomendadas para o perfeito travamento e amarração dos blocos ou tijolos.
+  expected_output: >
+    Um guia prático e operacional de alvenaria estrutural e vedação, detalhando tolerâncias de prumo e técnicas de execução para evitar patologias futuras.
+  agent: pedreiro_alvenaria
+
+tarefa_aplicar_acabamento:
+  description: >
+    Com os panos de alvenaria consolidados, descrever metodologicamente o processo de preparação superficial e regularização de bases. 
+    Explicar minuciosamente a aplicação de chapisco, a execução do reboco (emboço e massa única), o nivelamento milimétrico do contra-piso 
+    e as melhores práticas de paginação e assentamento para revestimentos cerâmicos e porcelanatos.
+  expected_output: >
+    Um manual técnico de revestimentos e acabamento fino, detalhando a preparação de argamassas colantes, tempos de cura e critérios de alinhamento estético.
+  agent: pedreiro_acabamento
+
+tarefa_pintura_final:
+  description: >
+    Consolidar o encerramento do manual COPE detalhando a engenharia de proteção superficial e estética final. 
+    Explicar o processo rigoroso de limpeza e cura das bases, aplicação de seladores acrílicos, o uso de massa corrida para correção de microimperfeições, 
+    o processo técnico de lixamento sem contaminação e a técnica correta de aplicação e demãos de tintas (internas e externas).
+  expected_output: >
+    O capítulo final e de controle de qualidade do manual, focado em acabamento estético, especificação de polímeros e tintas, e proteção de superfícies contra intempéries.
+  agent: pintor

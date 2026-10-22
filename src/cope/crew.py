@@ -1,15 +1,16 @@
+# src/manual_da_construcao_civil/crew.py
+
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
 @CrewBase
-class ManualDaConstrucaoCivilCrew():
-    """ManualDaConstrucaoCivil crew"""
+class CopeCrew():
+    """Crew responsável pela orquestração do ecossistema COPE (Colher de Pedreiro Executiva)"""
 
-    # Mantem o padrao do CrewAI de ler os arquivos sem acentos
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
-    # --- AGENTES ---
+    # --- AGENTES (Especialistas COPE) ---
 
     @agent
     def arquiteto(self) -> Agent:
@@ -60,7 +61,7 @@ class ManualDaConstrucaoCivilCrew():
             verbose=True
         )
 
-    # --- TAREFAS ---
+    # --- TAREFAS (Fluxo Construtivo COPE) ---
 
     @task
     def tarefa_arquitetura(self) -> Task:
@@ -104,14 +105,16 @@ class ManualDaConstrucaoCivilCrew():
             config=self.tasks_config['tarefa_pintura_final']
         )
 
-    # --- COORDENACAO DA CREW ---
+    # --- COORDENAÇÃO DA TRIPULAÇÃO ---
 
     @crew
     def crew(self) -> Crew:
-        """Creates the ManualDaConstrucaoCivil crew"""
+        """Cria e injeta o fluxo de execução sequencial do COPE"""
         return Crew(
-            agents=self.agents,  # Automaticamente pega todos os @agent listados acima
-            tasks=self.tasks,    # Automaticamente pega todas as @task listadas acima na ordem correta
-            process=Process.sequential,  # Linha de producao garantida
-            verbose=True,
+            agents=self.agents,
+            tasks=self.tasks,
+            process=Process.sequential,
+            verbose=True, # <-- Garante que cada pensamento apareça no terminal na hora
+            memory=False  # <-- Desative a memória temporariamente para poupar processamento local
         )
+

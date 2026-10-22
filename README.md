@@ -1,6 +1,8 @@
-# 📱 Manual da Construção Civil - Mobile App (AI Powered)
+# 📱 COPE - Colher de Pedreiro Executiva | Mobile App (AI Powered) 🛠️🧠
 
-Este repositório contém o código-fonte de um **aplicativo de celular** desenvolvido para levar inteligência artificial diretamente para o canteiro de obras. O objetivo principal é fornecer a engenheiros, arquitetos e mestres de obras um assistente de campo inteligente para consulta de diretrizes de layout, regras de ventilação, incidência solar e boas práticas em tempo real.
+Este repositório contém o código-fonte do motor de Inteligência Artificial do **COPE (Colher de Pedreiro Executiva)**, um aplicativo de celular desenvolvido para conectar as diretrizes teóricas da Engenharia Civil e Arquitetura diretamente com a realidade prática do canteiro de obras. 
+
+Assim como a tradicional colher de pedreiro molda a massa e assenta o tijolo para dar vida à estrutura, o COPE organiza dados normativos, orçamentos, instalações e fluxos de trabalho em instruções claras, eficientes e acionáveis em tempo real para engenheiros, mestres de obras e construtores.
 
 O projeto faz parte do bootcamp **Bradesco Agentes de IA do Zero à Prática** em parceria com a **DIO**.
 
@@ -8,48 +10,48 @@ O projeto faz parte do bootcamp **Bradesco Agentes de IA do Zero à Prática** e
 
 ## 🛠️ Arquitetura do Sistema
 
-O aplicativo combina uma interface mobile ágil com um motor de inteligência artificial descentralizado e eficiente:
+O ecossistema combina uma interface mobile ágil com um motor de inteligência artificial descentralizado, focado em autonomia de campo:
 
-- **Frontend Mobile:** Interface otimizada para o dia a dia no campo de trabalho.
-- **Motor de IA (Orquestração):** Framework **CrewAI** gerenciando um sistema multiagente especializado.
-- **Processamento Local (LLM):** **Llama 3.1 (8B / 4.9 GB)** rodando 100% local via **Ollama**, garantindo privacidade de dados, autonomia e custo zero com APIs pagas.
+- **Frontend Mobile:** Interface otimizada para consultas dinâmicas no chão de fábrica e canteiros.
+- **Motor de IA (Orquestração):** Framework **CrewAI** gerenciando uma equipe multiagente especializada (CopeCrew).
+- **Processamento Local (LLM):** **Llama 3.1 (8B / 4.9 GB)** rodando 100% local via **Ollama**, garantindo total privacidade de dados, independência de sinal de internet nas obras e custo zero com chaves de API.
 
 ---
 
 ## 🏗️ Como a IA funciona por trás do App
 
-A inteligência de retaguarda do aplicativo é estruturada através do CrewAI (padrão classic) e está dividida em módulos:
+A inteligência de retaguarda do aplicativo é estruturada através do ecossistema de agentes do COPE e está dividida nos seguintes módulos:
 
-- `src/manual_da_construcao_civil/config/agents.yaml`: Perfil e *backstory* dos agentes especialistas (ex: Engenheiro de Layout, Analista de Conforto Ambiental).
-- `src/manual_da_construcao_civil/config/tasks.yaml`: Escopo das análises técnicas de engenharia, ventilação e iluminação natural.
-- `src/manual_da_construcao_civil/crew.py`: Configuração do pipeline de IA e injeção do modelo local Llama 3.1.
-- `src/manual_da_construcao_civil/main.py`: Camada de serviço que expõe a execução dos agentes para consumo da aplicação celular.
+- `src/manual_da_construcao_civil/config/agents.yaml`: Definição de perfis, escopo técnico e *backstory* das personas especializadas da consultoria (ex: Arquiteto Consultor, Engenheiro Estrutural, Especialistas em Alvenaria e Acabamentos).
+- `src/manual_da_construcao_civil/config/tasks.yaml`: Caderno de encargos técnicos mapeando o fluxo sequencial que vai desde o planejamento tridimensional à pintura e proteção de superfícies.
+- `src/manual_da_construcao_civil/crew.py`: Arquivo de orquestração estruturado na classe `CopeCrew`, responsável por gerenciar a injeção do modelo local e sincronizar as dependências das tarefas.
+- `src/manual_da_construcao_civil/main.py`: Camada de serviço e pontos de entrada que expõem a inteligência dos agentes para consumo da aplicação celular.
 
 ---
 
 ## 💻 Instalação e Configuração do Motor de IA
 
-Para que o aplicativo possa realizar as consultas de IA offline/localmente, configure o ambiente de execução:
+Para que o aplicativo possa realizar as consultas de IA de forma offline e local, configure o ambiente de desenvolvimento seguindo as etapas abaixo:
 
 ### Pré-requisitos
 - Python >= 3.10, < 3.14
-- [Ollama](https://ollama.com) instalado e ativo na máquina local/servidor de desenvolvimento.
-- [UV](https://astral.sh) para gerenciamento rápido de pacotes Python.
+- [Ollama](https://ollama.com) instalado e ativo no ambiente local ou servidor de desenvolvimento.
+- [UV](https://astral.sh) para gerenciamento de pacotes Python em alta performance.
 
 ### 1. Inicializar o Modelo Local
 ```bash
 ollama run llama3.1
 ```
 
-### 2. Instalar Dependências do Back-end
-Utilizando o gerenciador `uv` na raiz do projeto:
+### 2. Instalar Dependências do Sistema
+Utilizando o gerenciador `uv` na raiz do seu projeto Python:
 ```bash
 pip install uv
 crewai install
 ```
 
 ### 3. Variáveis de Ambiente (`.env`)
-Configure o direcionamento para o modelo local:
+Certifique-se de que o arquivo `.env` na raiz aponta corretamente para a instância local do Ollama:
 ```env
 MODEL=ollama/llama3.1
 ```
@@ -58,7 +60,7 @@ MODEL=ollama/llama3.1
 
 ## 🚀 Execução e Testes
 
-Seguindo um fluxo profissional rigoroso de engenharia de software (validação de ambiente, execução de testes e commits seguros no GitHub), você pode testar o motor de IA isoladamente via CLI com o comando:
+Seguindo um fluxo profissional rigoroso de engenharia de software (validação de ambiente, execução de pipelines locais e versionamento seguro), você pode disparar a simulação completa da mesa de engenharia do COPE via CLI:
 
 ```bash
 crewai run
@@ -67,10 +69,10 @@ crewai run
 ---
 
 ## 🎯 Status do Roadmap do Projeto
-- [x] Modelagem e validação do sistema multiagente (CrewAI).
-- [x] Execução estável e homologada com Llama 3.1 local via Ollama.
-- [x] Versionamento inicial seguro no GitHub.
-- [ ] Conectar e expor os agentes para consumo direto na interface do aplicativo mobile.
+- [x] Modelagem, refinamento e validação do sistema multiagente (**COPE**).
+- [x] Execução estável homologada com Llama 3.1 local via Ollama.
+- [x] Versionamento inicial e subida segura no GitHub.
+- [ ] Conectar e expor os endpoints de serviço dos agentes para consumo direto na interface do aplicativo mobile.
 
 ---
 Desenvolvido por Daniel | Portfólio Técnico de IA & Desenvolvimento Mobile.
