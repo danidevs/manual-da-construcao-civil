@@ -13,8 +13,8 @@ O projeto faz parte do bootcamp **Bradesco Agentes de IA do Zero à Prática** e
 O ecossistema combina uma interface mobile ágil com um motor de inteligência artificial descentralizado, focado em autonomia de campo:
 
 - **Frontend Mobile:** Interface otimizada para consultas dinâmicas no chão de fábrica e canteiros.
-- **Motor de IA (Orquestração):** Framework **CrewAI** gerenciando uma equipe multiagente especializada (CopeCrew).
-- **Processamento Local (LLM):** **Llama 3.1 (8B / 4.9 GB)** rodando 100% local via **Ollama**, garantindo total privacidade de dados, independência de sinal de internet nas obras e custo zero com chaves de API.
+- **Motor de IA (Orquestração):** Framework **Sub-CrewAI** gerenciando uma equipe multiagente especializada (CopeCrew).
+- **Processamento Local (LLM):** Modelo customizado **COPE** rodando 100% local via **Ollama**, garantindo total privacidade de dados, independência de sinal de internet nas obras e custo zero com chaves de API.
 
 ---
 
@@ -22,8 +22,8 @@ O ecossistema combina uma interface mobile ágil com um motor de inteligência a
 
 A inteligência de retaguarda do aplicativo é estruturada através do ecossistema de agentes do COPE e está dividida nos seguintes módulos:
 
-- `src/manual_da_construcao_civil/config/agents.yaml`: Definição de perfis, escopo técnico e *backstory* das personas especializadas da consultoria (ex: Arquiteto Consultor, Engenheiro Estrutural, Especialistas em Alvenaria e Acabamentos).
-- `src/manual_da_construcao_civil/config/tasks.yaml`: Caderno de encargos técnicos mapeando o fluxo sequencial que vai desde o planejamento tridimensional à pintura e proteção de superfícies.
+- `src/manual_da_construcao_civil/config/agents.yaml`: Definição de perfis, escopo técnico, *backstory* e estilo de comunicação das personas especializadas (ex: Consultor Financeiro, Arquiteto Sênior, Engenheiro Estrutural, Especialistas em Alvenaria e Acabamentos).
+- `src/manual_da_construcao_civil/config/tasks.yaml`: Caderno de encargos técnicos mapeando o fluxo sequencial e condicionado pelo teto financeiro do projeto.
 - `src/manual_da_construcao_civil/crew.py`: Arquivo de orquestração estruturado na classe `CopeCrew`, responsável por gerenciar a injeção do modelo local e sincronizar as dependências das tarefas.
 - `src/manual_da_construcao_civil/main.py`: Camada de serviço e pontos de entrada que expõem a inteligência dos agentes para consumo da aplicação celular.
 
@@ -38,9 +38,9 @@ Para que o aplicativo possa realizar as consultas de IA de forma offline e local
 - [Ollama](https://ollama.com) instalado e ativo no ambiente local ou servidor de desenvolvimento.
 - [UV](https://astral.sh) para gerenciamento de pacotes Python em alta performance.
 
-### 1. Inicializar o Modelo Local
+### 1. Inicializar o Modelo Local Customizado
 ```bash
-ollama run llama3.1
+ollama run cope
 ```
 
 ### 2. Instalar Dependências do Sistema
@@ -51,9 +51,9 @@ crewai install
 ```
 
 ### 3. Variáveis de Ambiente (`.env`)
-Certifique-se de que o arquivo `.env` na raiz aponta corretamente para a instância local do Ollama:
+Certifique-se de que o arquivo `.env` na raiz aponta corretamente para a sua versão customizada do modelo no Ollama:
 ```env
-MODEL=ollama/llama3.1
+MODEL=ollama/cope
 ```
 
 ---
@@ -70,7 +70,7 @@ crewai run
 
 ## 🎯 Status do Roadmap do Projeto
 - [x] Modelagem, refinamento e validação do sistema multiagente (**COPE**).
-- [x] Execução estável homologada com Llama 3.1 local via Ollama.
+- [x] Inicialização e execução estável homologada localmente via comando `ollama run cope`.
 - [x] Versionamento inicial e subida segura no GitHub.
 - [ ] Conectar e expor os endpoints de serviço dos agentes para consumo direto na interface do aplicativo mobile.
 
