@@ -13,6 +13,13 @@ class CopeCrew():
     # --- AGENTES (Especialistas COPE) ---
 
     @agent
+    def gestor_financeiro(self) -> Agent:
+        return Agent(
+            config=self.agents_config['gestor_financeiro'],
+            verbose=True
+        )
+
+    @agent
     def arquiteto(self) -> Agent:
         return Agent(
             config=self.agents_config['arquiteto'],
@@ -62,6 +69,12 @@ class CopeCrew():
         )
 
     # --- TAREFAS (Fluxo Construtivo COPE) ---
+
+    @task
+    def tarefa_viabilidade_financeira(self) -> Task:
+        return Task(
+            config=self.tasks_config['tarefa_viabilidade_financeira']
+        )
 
     @task
     def tarefa_arquitetura(self) -> Task:
@@ -114,7 +127,6 @@ class CopeCrew():
             agents=self.agents,
             tasks=self.tasks,
             process=Process.sequential,
-            verbose=True, # <-- Garante que cada pensamento apareça no terminal na hora
-            memory=False  # <-- Desative a memória temporariamente para poupar processamento local
+            verbose=True, 
+            memory=False  
         )
-

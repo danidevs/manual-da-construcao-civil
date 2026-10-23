@@ -1,64 +1,98 @@
 # src/manual_da_construcao_civil/config/tasks.yaml
 
+tarefa_viabilidade_financeira:
+  description: >
+    Analisar o cenário econômico atual do mercado construtivo e definir os parâmetros iniciais de custo 
+    para o manual COPE. Estabelecer o teto orçamentário ideal por metro quadrado (m²), diretrizes de engenharia de valor, 
+    metas claras de retorno sobre o investimento (ROI) e o mapeamento dos principais gargalos de desperdício financeiro na obra.
+  expected_output: >
+    Um relatório de viabilidade econômica estruturado com premissas orçamentárias e metas financeiras rígidas que guiarão o desenvolvimento técnico de todo o manual.
+  agent: gestor_financeiro
+
 tarefa_arquitetura:
   description: >
-    Desenvolver as diretrizes iniciais do ecossistema COPE focando no planejamento e concepção do layout residencial. 
+    Desenvolver as diretrizes do ecossistema COPE focando no planejamento e concepção do layout residencial. 
     Explicar detalhadamente como definir o posicionamento estratégico dos cômodos, otimização e aproveitamento do terreno, 
-    fluxo de circulação interna, além de conceitos de conforto térmico através do aproveitamento de luz solar e ventilação natural.
+    fluxo de circulação interna e conforto térmico (iluminação e ventilação natural). O design deve aplicar conceitos de neuroarquitetura 
+    e respeitar estritamente o teto de gastos definido pelo Gestor Financeiro.
   expected_output: >
-    Um guia executivo de planejamento arquitetônico, contendo organogramas de fluxo, diretrizes de layout e conceitos de eficiência espacial para a edificação.
+    Um guia de planejamento arquitetônico contendo organogramas de fluxo, diretrizes de layout e conceitos de eficiência espacial integrados às metas orçamentárias.
   agent: arquiteto
+  context:
+    - tarefa_viabilidade_financeira
 
 tarefa_estrutura_civil:
   description: >
-    Com base no layout consolidado pela consultoria de arquitetura, estabelecer as instruções técnicas rigorosas para a infraestrutura e superestrutura. 
-    Descrever o passo a passo metodológico para marcação do terreno (gabarito), abertura de valas, execução do sistema de fundação 
-    (alicerces/sapatas) e o detalhamento técnico para montagem de armaduras, colunas, vigas e lajes.
+    Com base no layout consolidado pela consultoria de arquitetura e sob as rédeas do orçamento financeiro, estabelecer as instruções 
+    técnicas rigorosas para a infraestrutura e superestrutura. Descrever o passo a passo metodológico para marcação do terreno (gabarito), 
+    abertura de valas, execução de sapatas/alicerces e o detalhamento milimétrico para armações, vigas, colunas e lajes.
   expected_output: >
-    Um manual de engenharia estrutural especificando traços de concreto ideais, fatores de cura, normas de segurança aplicáveis (NBRs) e critérios de estabilidade.
+    Um manual de engenharia estrutural especificando traços de concreto ideais, fatores de cura, normas técnicas (NBRs) aplicáveis e critérios de estabilidade de baixo custo e alta eficiência.
   agent: engenheiro_civil
+  context:
+    - tarefa_viabilidade_financeira
+    - tarefa_arquitetura
 
 tarefa_instalacao_eletrica:
   description: >
-    A partir dos parâmetros estruturais definidos, integrar as diretrizes de engenharia para a rede elétrica predial. 
-    Explicar o posicionamento estratégico das caixas de passagem, o caminhamento correto dos conduítes embutidos em paredes e lajes, 
-    o dimensionamento técnico de condutores (bitolas dos cabos) e a arquitetura de montagem do Quadro de Distribuição de Circuitos (QDC).
+    A partir dos parâmetros estruturais e do teto de custos definidos, integrar as diretrizes de engenharia para a rede elétrica predial. 
+    Explicar o posicionamento estratégico das caixas de passagem, o caminhamento de conduítes embutidos, o dimensionamento técnico de condutores 
+    (bitolas dos cabos) e a arquitetura de montagem do Quadro de Distribuição de Circuitos (QDC).
   expected_output: >
-    Um memorial descritivo e passo a passo técnico para instalações elétricas residenciais, focado em segurança contra sobrecargas, balanceamento de fases e conformidade com a NBR 5410.
+    Um memorial descritivo e passo a passo técnico para instalações elétricas residenciais seguras, focadas em eficiência energética, balanceamento de fases e conformidade com a NBR 5410.
   agent: engenheiro_eletrico
+  context:
+    - tarefa_viabilidade_financeira
+    - tarefa_estrutura_civil
 
 tarefa_planejamento_canteiro:
   description: >
     Consolidar as diretrizes técnicas dos engenheiros e do arquiteto para estruturar a inteligência operacional do canteiro sob o padrão COPE. 
     Elaborar um cronograma físico-financeiro prático de execução, a logística de recebimento, armazenamento e estocagem estratégica de insumos, 
-    além de métodos de liderança e distribuição de equipes para mitigar o tempo ocioso.
+    além de métodos de liderança e distribuição de equipes para mitigar o tempo ocioso e garantir acidentes zero.
   expected_output: >
-    Um plano de gerenciamento e logística de canteiro de obras, formatado como um guia de tomada de decisão para otimização de recursos.
+    Um plano completo de gerenciamento e logística de canteiro de obras, formatado com cronogramas lógicos, sequenciamento de etapas e práticas de Segurança do Trabalho aplicadas.
   agent: mestre_de_obras
-
+  context:
+    - tarefa_viabilidade_financeira
+    - tarefa_arquitetura
+    - tarefa_estrutura_civil
+    - tarefa_instalacao_eletrica
 tarefa_erguer_alvenaria:
   description: >
-    Desenvolver as instruções de campo detalhadas para o levantamento de paredes e alvenaria de vedação/estrutural, seguindo o cronograma logístico. 
-    Explicar com rigor técnico o preparo e dosagem da massa de assentamento, a utilização correta de ferramentas de precisão (prumo, nível de bolha ou laser e linha de nylon) 
-    e as técnicas recomendadas para o perfeito travamento e amarração dos blocos ou tijolos.
+    Com base no plano de canteiro do mestre de obras e nas especificações estruturais, detalhar o passo a passo prático 
+    para o levantamento das paredes. Explicar a proporção correta para mistura de massas, técnicas de assentamento de blocos/tijolos, 
+    e o uso rigoroso do prumo, nível e esquadro para garantir que a alvenaria seja perfeitamente vertical e estável.
   expected_output: >
-    Um guia prático e operacional de alvenaria estrutural e vedação, detalhando tolerâncias de prumo e técnicas de execução para evitar patologias futuras.
+    Capítulo prático do manual focado em execução de alvenaria estrutural e de vedação de alta resistência, com foco em alinhamento perfeito.
   agent: pedreiro_alvenaria
+  context:
+    - tarefa_viabilidade_financeira
+    - tarefa_estrutura_civil
+    - tarefa_planejamento_canteiro
 
 tarefa_aplicar_acabamento:
   description: >
-    Com os panos de alvenaria consolidados, descrever metodologicamente o processo de preparação superficial e regularização de bases. 
-    Explicar minuciosamente a aplicação de chapisco, a execução do reboco (emboço e massa única), o nivelamento milimétrico do contra-piso 
-    e as melhores práticas de paginação e assentamento para revestimentos cerâmicos e porcelanatos.
+    Desenvolver o guia técnico para as etapas de revestimento após a cura da alvenaria. Detalhar as técnicas refinadas para 
+    aplicação de reboco uniforme, regularização de contra-piso para evitar desníveis, paginação inteligente de pisos e o processo 
+    de assentamento milimétrico de azulejos e porcelanatos de alto padrão.
   expected_output: >
-    Um manual técnico de revestimentos e acabamento fino, detalhando a preparação de argamassas colantes, tempos de cura e critérios de alinhamento estético.
+    Seção do manual dedicada a acabamentos e revestimentos residenciais, focada em precisão milimétrica, esquadro e estética impecável.
   agent: pedreiro_acabamento
+  context:
+    - tarefa_viabilidade_financeira
+    - tarefa_arquitetura
+    - tarefa_erguer_alvenaria
 
 tarefa_pintura_final:
   description: >
-    Consolidar o encerramento do manual COPE detalhando a engenharia de proteção superficial e estética final. 
-    Explicar o processo rigoroso de limpeza e cura das bases, aplicação de seladores acrílicos, o uso de massa corrida para correção de microimperfeições, 
-    o processo técnico de lixamento sem contaminação e a técnica correta de aplicação e demãos de tintas (internas e externas).
+    Finalizar o fluxo técnico do manual com as diretrizes de proteção superficial e estética. Explicar detalhadamente o processo 
+    de lixamento e preparação de superfícies, tratamento preventivo contra umidade, aplicação correta de seladores, correção de 
+    microimperfeições com massa corrida e as técnicas de aplicação da tinta final para máxima durabilidade.
   expected_output: >
-    O capítulo final e de controle de qualidade do manual, focado em acabamento estético, especificação de polímeros e tintas, e proteção de superfícies contra intempéries.
+    Capítulo de fechamento do manual focado em técnicas de pintura residencial, preparação de superfícies e proteção estética de longo prazo.
   agent: pintor
+  context:
+    - tarefa_viabilidade_financeira
+    - tarefa_arquitetura
+    - tarefa_aplicar_acabamento
